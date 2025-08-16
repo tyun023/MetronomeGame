@@ -4,6 +4,9 @@ var attributes : SongAttributes
 
 var _bps : float #= 60.0 / bpm
 var _hbps : float #= .5 * _bps
+#twelfth bps makes it easier to divide a beat into usable parts. 
+# i.e. Qtr notes: 12, sixtheenth: 6, 32nd: 3, triplets, 4 
+var _twelfth_bps : float #= twelfth beats per second. 
 
 var _time_since_last_beat : float = 0
 
@@ -34,6 +37,9 @@ func _physics_process(delta: float) -> void:
 		_time_since_last_beat -= 1 / spb
 		current_beat += 1
 		emit_signal("beat_occured")
+		
+
+#emit different beat signals for each note denomination
 	
 func getAttributes() -> SongAttributes:
 	if (attributes == null):

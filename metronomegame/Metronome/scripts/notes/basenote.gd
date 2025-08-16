@@ -30,7 +30,6 @@ func _set_metronome(meter : Metronome) -> void:
 	print("why")
 	
 	if (attributes != null):
-		
 		#calculates basic info from time signature
 		notes_per_beat =  _beat_value / attributes.time_signature[1]
 		print(notes_per_beat)
