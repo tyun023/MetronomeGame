@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="SongAttributes" load_steps=2 format=3 uid="uid://dsbxlsgp33vtm"]
 
-[ext_resource type="Script" path="res://Metronome/scripts/SongAttributes.gd" id="1_2a4tq"]
+[ext_resource type="Script" uid="uid://dqgbqpf0hui6q" path="res://Metronome/scripts/SongAttributes.gd" id="1_2a4tq"]
 
 [resource]
 script = ExtResource("1_2a4tq")
-bpm = 240.0
+bpm = 60.0
 time_signature = Array[int]([4, 4])

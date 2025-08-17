@@ -32,11 +32,15 @@ func _process(delta: float) -> void:
 func give_note_rating() -> Note_Score:
 	var error_dist : float = _error_from_valid_note()
 	if (error_dist < perfect_range):
+		print("perfect")
 		return Note_Score.PERFECT
 	if (error_dist < good_range):
+		print("good")
 		return Note_Score.GOOD
 	if (error_dist < bad_range):
+		print("bad")
 		return Note_Score.BAD
+	print("miss")
 	return Note_Score.MISS
 
 # TODO, if the bpm is too high, the ranges might go outside the beat timings

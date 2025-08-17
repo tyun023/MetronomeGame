@@ -7,6 +7,7 @@ class_name State_Walk extends State
 # When player enters state
 func Enter() -> void:
 	#player.UpdateAnimation("walking")
+	print("walk")
 	pass
 	
 # When player enters state

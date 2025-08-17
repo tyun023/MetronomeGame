@@ -1,6 +1,7 @@
 class_name Metronome extends Node
 
 var attributes : SongAttributes
+var notifier : RhythmNotifier
 
 var _bps : float #= 60.0 / bpm
 var _hbps : float #= .5 * _bps
@@ -21,6 +22,8 @@ func _ready() -> void:
 	var bpm : int = attributes.bpm
 	_bps = 60.0 / bpm
 	current_beat = 0
+	notifier = RhythmNotifier.new()
+	activateNotifier()
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -36,8 +39,9 @@ func _physics_process(delta: float) -> void:
 	if ( _time_since_last_beat >= 1 / spb):
 		_time_since_last_beat -= 1 / spb
 		current_beat += 1
-		emit_signal("beat_occured")
+		#emit_signal("beat_occured")
 		
+	pass
 
 #emit different beat signals for each note denomination
 	
@@ -55,3 +59,16 @@ func setAttributes(att : SongAttributes) -> bool:
 func setAttributesName(att_name : String) -> bool:
 	var att = load(str("res://Metronome/SongAttributes/", att_name, ".tres"))
 	return setAttributes(att)
+	
+func activateNotifier() -> void:
+	notifier.bpm = attributes.bpm
+
+	notifier.beats(1).connect(func(): emit_signal("beat_occured"))
+	notifier.beats(attributes.time_signature[0]).connect(func(count): print("Hello from measure %d!" % (count)))
+	notifier.running = true
+	
+	pass
+	
+func getNoteLength() -> float:
+	return notifier.beat_length
+	

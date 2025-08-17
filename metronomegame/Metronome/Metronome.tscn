@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bn0r0qsrncak8"]
 
-[ext_resource type="Script" path="res://Metronome/scripts/metronome.gd" id="1_t5y3o"]
-[ext_resource type="Script" path="res://Metronome/timer.gd" id="3_fmbf2"]
+[ext_resource type="Script" uid="uid://q8jgul0p8est" path="res://Metronome/scripts/metronome.gd" id="1_t5y3o"]
+[ext_resource type="Script" uid="uid://8h2gucpn75cp" path="res://Metronome/timer.gd" id="3_fmbf2"]
 
 [node name="Metronome" type="Node2D"]
 script = ExtResource("1_t5y3o")

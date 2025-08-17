@@ -4,6 +4,7 @@ class_name State_Dash extends State
 @onready var idle : State = $"../Idle"
 
 var note : QuarterNote
+var our_note : PlayerNote
 
 var internal_dash_timer : float = 0.0
 
@@ -21,10 +22,14 @@ var on_cooldown : bool = false
 func _ready() -> void:
 	note = QuarterNote.new()
 	note._set_metronome($"../../Metronome")
+	our_note = PlayerNote.new()
+	our_note.playable_on = note
+	our_note.note = note
 	pass
 
 # When player enters state
 func Enter() -> void:
+	our_note.give_note_rating() 
 	#player.UpdateAnimation("idle")
 	#needed for dashing
 	dash_direction = Vector2.RIGHT.rotated(player.rotation)
