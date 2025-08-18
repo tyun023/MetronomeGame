@@ -1,4 +1,4 @@
-class_name PlayerNote extends Resource
+class_name PlayerNote extends Node
 
 var note : BaseNote
 
@@ -73,6 +73,6 @@ func _error_from_valid_note() -> float:
 		
 	#TODO case for when playable_on > note
 	'''
-	
+	print(error_diffs.min())
 	
 	return error_diffs.min()

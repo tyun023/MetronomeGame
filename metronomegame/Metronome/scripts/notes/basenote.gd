@@ -40,6 +40,7 @@ func _set_metronome(meter : Metronome) -> void:
 		duration = 60 / (notes_per_beat * attributes.bpm)
 
 func _on_beat_occurred() -> void:
+	print("beat happened")
 	time_since_beat = 0
 	#syncing the internal timer to make sure it doesn't get out of sync every so often
 	#doesn't quite work for one and half beat, so need to figure that out

@@ -1,7 +1,7 @@
 class_name Metronome extends Node
 
 var attributes : SongAttributes
-var notifier : RhythmNotifier
+@onready var notifier : RhythmNotifier = $RhythmNotifier
 
 var _bps : float #= 60.0 / bpm
 var _hbps : float #= .5 * _bps
@@ -16,13 +16,14 @@ var current_beat : int = 0
 signal beat_occured
 
 
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	attributes = load("res://Metronome/SongAttributes/song_attributes_default.tres")
 	var bpm : int = attributes.bpm
 	_bps = 60.0 / bpm
 	current_beat = 0
-	notifier = RhythmNotifier.new()
 	activateNotifier()
 	pass
 
@@ -63,7 +64,10 @@ func setAttributesName(att_name : String) -> bool:
 func activateNotifier() -> void:
 	notifier.bpm = attributes.bpm
 
-	notifier.beats(1).connect(func(): emit_signal("beat_occured"))
+	var b = notifier.beats(1)
+	b.connect(func(count): print("Hello from note %d!" % (count)))
+	var a = notifier.beats(1)
+	a.connect(func(count): emit_signal("beat_occured"))
 	notifier.beats(attributes.time_signature[0]).connect(func(count): print("Hello from measure %d!" % (count)))
 	notifier.running = true
 	
