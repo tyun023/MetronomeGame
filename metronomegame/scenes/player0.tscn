@@ -1,0 +1,73 @@
+[gd_scene load_steps=15 format=3 uid="uid://c6al2btloohgx"]
+
+[ext_resource type="Script" uid="uid://dgvhs8c8jo1at" path="res://scripts/player/player.gd" id="1_iq3ln"]
+[ext_resource type="Script" uid="uid://bd5bvp40wvxeh" path="res://scripts/player/player_state_machine.gd" id="2_tv4ow"]
+[ext_resource type="Script" uid="uid://1yhfapoar26s" path="res://scripts/player/states/state_idle.gd" id="3_hxbjb"]
+[ext_resource type="Script" uid="uid://bgdd0pksxmi0b" path="res://scripts/player/states/state_walk.gd" id="4_ads5b"]
+[ext_resource type="Script" uid="uid://y18fdptngycp" path="res://scripts/player/states/state_dash.gd" id="5_60uw5"]
+[ext_resource type="Script" uid="uid://dwyixca3o82d1" path="res://scripts/metronome/notes/qtr_note.gd" id="6_sf4gc"]
+[ext_resource type="Texture2D" uid="uid://b66pulo52gho8" path="res://assets/player/TempPlayer.png" id="7_3wdol"]
+[ext_resource type="PackedScene" uid="uid://bn0r0qsrncak8" path="res://scenes/metronome/Metronome.tscn" id="8_cqw1c"]
+[ext_resource type="Resource" uid="uid://dsbxlsgp33vtm" path="res://assets/resources/SongAttributes/song_attributes_default.tres" id="9_nrod0"]
+[ext_resource type="Script" uid="uid://lgu40v7o00f2" path="res://scripts/components/health_component.gd" id="10_oek5m"]
+[ext_resource type="Script" uid="uid://vhlcx45q6vks" path="res://scripts/components/hurtbox_component.gd" id="11_tv4ow"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5refm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_3wdol")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_erir7"]
+radius = 23.0868
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tv4ow"]
+radius = 26.4008
+
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(507, 295)
+script = ExtResource("1_iq3ln")
+metadata/_edit_group_ = true
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("2_tv4ow")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("3_hxbjb")
+
+[node name="Walk" type="Node" parent="StateMachine"]
+script = ExtResource("4_ads5b")
+move_speed = 275.0
+
+[node name="Dash" type="Node" parent="StateMachine"]
+script = ExtResource("5_60uw5")
+
+[node name="QuarterNote" type="Node" parent="StateMachine/Dash"]
+script = ExtResource("6_sf4gc")
+
+[node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(-1.75, -1.25)
+scale = Vector2(0.1, 0.101)
+sprite_frames = SubResource("SpriteFrames_5refm")
+
+[node name="PlayerHitbox" type="CollisionShape2D" parent="."]
+position = Vector2(-3, -2)
+shape = SubResource("CircleShape2D_erir7")
+
+[node name="Metronome" parent="." instance=ExtResource("8_cqw1c")]
+attributes = ExtResource("9_nrod0")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("10_oek5m")
+
+[node name="HurtboxComponent" type="Area2D" parent="." node_paths=PackedStringArray("healt_component")]
+script = ExtResource("11_tv4ow")
+healt_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("CircleShape2D_tv4ow")
