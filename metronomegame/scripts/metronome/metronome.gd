@@ -1,6 +1,6 @@
 class_name Metronome extends Node
 
-var attributes : SongAttributes
+@export var attributes : SongAttributes
 @onready var notifier : RhythmNotifier = $RhythmNotifier
 
 var _bps : float #= 60.0 / bpm
@@ -20,7 +20,6 @@ signal beat_occured
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	attributes = load("res://Metronome/SongAttributes/song_attributes_default.tres")
 	var bpm : int = attributes.bpm
 	_bps = 60.0 / bpm
 	current_beat = 0
@@ -41,7 +40,6 @@ func _physics_process(delta: float) -> void:
 		_time_since_last_beat -= 1 / spb
 		current_beat += 1
 		#emit_signal("beat_occured")
-		
 	pass
 
 #emit different beat signals for each note denomination

@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=3 uid="uid://b66padi1wsx2m"]
 
-[ext_resource type="Script" uid="uid://dgvhs8c8jo1at" path="res://Player/scripts/player.gd" id="1_wfqxc"]
+[ext_resource type="Script" uid="uid://dgvhs8c8jo1at" path="res://scripts/player/player.gd" id="1_wfqxc"]
 [ext_resource type="Texture2D" uid="uid://d4ky8g3p1ve1s" path="res://Dungeon Knight Sheet.png" id="2_chjx6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fewm0"]
